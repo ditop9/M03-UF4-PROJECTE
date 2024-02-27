@@ -2,13 +2,14 @@ package ui;
 
 import interfaces.DataIntroduction;
 import location.Concessionaire;
+import vehicles.Car;
 
 public interface ConcessionaireMenu {
     static void runMenu(Concessionaire concessionaire) {
         int option;
         do {
             gui();
-            option = DataIntroduction.introduceOption();
+            option = DataIntroduction.introduceInteger();
             handleOption(option, concessionaire);
         } while (option != 0);
     }
@@ -45,13 +46,37 @@ public interface ConcessionaireMenu {
         System.out.println("0. TORNAR AL MENÚ");
     }
     static void introduceVehicle(Concessionaire concessionaire) {
-        int option = DataIntroduction.introduceOption();
+        int option = DataIntroduction.introduceInteger();
         switch (option) {
             case 1:
+                introduceCar(concessionaire);
                 break;
             case 0:
-                runMenu();
+                runMenu(concessionaire);
                 break;
+        }
+    }
+    static void introduceCar(Concessionaire concessionaire) {
+        String plate = DataIntroduction.introducePlate();
+        if (plate != null) {
+            char fuel = DataIntroduction.introduceFuelType();
+            if (fuel != '0') {
+                System.out.println("INTRODUEIX LA POTÈNCIA");
+                int horsePower = DataIntroduction.introduceInteger();
+                if (horsePower != -1) {
+                    Car car = new Car(plate, fuel, horsePower);
+                    concessionaire.addNewVehicle(car);
+                } else {
+                    System.out.println("ERROR: NO ÉS UN VALOR VÀLID");
+                    runMenu(concessionaire);
+                }
+            } else {
+                System.out.println("ERROR: NO ÉS UN TIPUS DE COMBUSTIBLE VÀLID");
+                runMenu(concessionaire);
+            }
+        } else {
+            System.out.println("ERROR: NO ÉS UNA MATRÍCULA DISPONIBLE");
+            runMenu(concessionaire);
         }
     }
 }

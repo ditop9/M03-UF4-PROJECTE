@@ -3,9 +3,10 @@ package location;
 import vehicles.Vehicle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Location {
-    private final ArrayList<Vehicle> vehicleList = new ArrayList<>();
+    private final List<Vehicle> vehicleList = new ArrayList<>();
     private String cityLocation;
     private String countryLocation;
     private int workersAmount;
@@ -15,5 +16,5 @@ public abstract class Location {
         this.countryLocation = countryLocation;
         this.workersAmount = workersAmount;
     }
-    public abstract void addNewVehicle();
+    public abstract void addNewVehicle(Vehicle vehicle);
 }

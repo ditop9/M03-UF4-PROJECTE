@@ -1,17 +1,14 @@
 package ui;
 
 import interfaces.DataIntroduction;
-import vehicles.Vehicle;
-
-import java.util.ArrayList;
+import location.Workshop;
 
 public interface WorkshopMenu {
-    ArrayList<Vehicle> workshopVehicles = new ArrayList<>();
-    static void runMenu() {
+    static void runMenu(Workshop workshop) {
         int option;
         do {
             gui();
-            option = DataIntroduction.introduceOption();
+            option = DataIntroduction.introduceInteger();
             handleOption(option);
         } while (option != 0);
     }

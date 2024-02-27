@@ -2,13 +2,15 @@ package ui;
 
 import interfaces.DataIntroduction;
 import location.Concessionaire;
+import app.App;
+import location.Workshop;
 
 public interface Home {
     static void runMenu() {
         int option;
         do {
             gui();
-            option = DataIntroduction.introduceOption();
+            option = DataIntroduction.introduceInteger();
             handleOption(option);
         } while (option != 0);
     }
@@ -24,11 +26,30 @@ public interface Home {
     static void handleOption(int option) {
         switch (option) {
             case 1:
-                Concessionaire concessionaire = new;
-                ConcessionaireMenu.runMenu(concessionaire);
+                if (!App.concessionaires.isEmpty()) {
+                    App.showAvailableLocations(App.concessionaires);
+                    int concessionaireIndex = DataIntroduction.introduceInteger();
+                    Concessionaire concessionaire = (Concessionaire) App.chooseLocation(App.concessionaires ,concessionaireIndex - 1);
+                    if (concessionaire != null) {
+                        ConcessionaireMenu.runMenu(concessionaire);
+                    } else {
+                        System.out.println("ERROR: NO ES TROBA EL CONCESSIONARI");
+                        break;
+                    }
+                } else System.out.println("ERROR: NO ES TROBEN CONCESSIONARIS DISPONIBLES");
                 break;
             case 2:
-                WorkshopMenu.runMenu();
+                if (!App.workshops.isEmpty()) {
+                    App.showAvailableLocations(App.workshops);
+                    int workshopIndex = DataIntroduction.introduceInteger();
+                    Workshop workshop = (Workshop) App.chooseLocation(App.workshops ,workshopIndex - 1);
+                    if (workshop != null) {
+                        WorkshopMenu.runMenu(workshop);
+                    } else {
+                        System.out.println("ERROR: NO ES TROBA EL TALLER");
+                        break;
+                    }
+                } else System.out.println("ERROR: NO ES TROBEN TALLERS DISPONIBLES");
                 break;
             case 3:
                 break;
@@ -36,11 +57,9 @@ public interface Home {
                 System.out.println("EL PPROGRAMA ES TANCA...");
                 System.exit(0);
                 break;
+            default:
+                System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");;
         }
     }
-    static Concessionaire showAvailableConcessionaire() {
-        for (int i = 0; i < App.getConcessionaires; i++) {
 
-        }
-    }
 }
