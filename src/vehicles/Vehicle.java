@@ -21,4 +21,13 @@ public abstract class Vehicle {
         this.tireQuantity = tireQuantity;
         this.horsePower = horsePower;
     }
+
+    @Override
+    public String toString() {
+        return "Matrícula: " + plate + "\n" +
+                "Quantitat de rodes: " + tireQuantity + "\n" +
+                "Tipus de combustible: " + fuel + "\n" +
+                "Potència: " + horsePower + "\n" +
+                "_____________________________";
+    }
 }

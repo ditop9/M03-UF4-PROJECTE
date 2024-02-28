@@ -61,5 +61,12 @@ public interface Home {
                 System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");;
         }
     }
+    static void introduceVehicleUi() {
+        System.out.println("=== ESCULL UNA OPCIÓ ===");
+        System.out.println("1. INTRODUIR COTXE");
+        System.out.println("2. INTRODUIR MOTO");
+        System.out.println("3. INTRODUIR CAMIÓ");
+        System.out.println("0. TORNAR AL MENÚ");
+    }
 
 }

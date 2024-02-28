@@ -17,4 +17,12 @@ public abstract class Location {
         this.workersAmount = workersAmount;
     }
     public abstract void addNewVehicle(Vehicle vehicle);
+
+    @Override
+    public String toString() {
+        return "Ciutat: " + cityLocation + "\n" +
+                "País: " + countryLocation + "\n" +
+                "Treballadors: " + workersAmount + "\n" +
+                "_____________________________";
+    }
 }

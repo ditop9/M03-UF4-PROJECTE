@@ -7,21 +7,24 @@ public interface WorkshopMenu {
     static void runMenu(Workshop workshop) {
         int option;
         do {
-            gui();
+            gui(workshop);
             option = DataIntroduction.introduceInteger();
-            handleOption(option);
+            handleOption(option, workshop);
         } while (option != 0);
     }
-    static void gui() {
+    static void gui(Workshop workshop) {
+        System.out.println("TALLER: " + workshop.getName());
         System.out.println("====== MENÚ  TALLER ======");
         System.out.println("==== ESCULL UNA OPCIÓ ====");
         System.out.println("==========================");
-        System.out.println("1. ");
+        System.out.println("1. INTRODUIR NOU VEHICLE");
+        System.out.println("2. MOSTRAR ELS VEHICLES");
         System.out.println("0. EXIT");
     }
-    static void handleOption(int option) {
+    static void handleOption(int option, Workshop workshop) {
         switch (option) {
             case 1:
+
                 break;
             case 2:
                 break;

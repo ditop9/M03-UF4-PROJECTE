@@ -2,9 +2,8 @@ package ui;
 
 import interfaces.DataIntroduction;
 import location.Concessionaire;
-import vehicles.Car;
 
-public interface ConcessionaireMenu {
+public interface ConcessionaireMenu extends Home {
     static void runMenu(Concessionaire concessionaire) {
         int option;
         do {
@@ -18,65 +17,37 @@ public interface ConcessionaireMenu {
         System.out.println("==== ESCULL UNA OPCIÓ ====");
         System.out.println("==========================");
         System.out.println("1. INTRODUIR NOU VEHICLE");
+        System.out.println("2. MOSTRAR ELS VEHICLES");
         System.out.println("0. EXIT");
     }
     static void handleOption(int option, Concessionaire concessionaire) {
         switch (option) {
             case 1:
-                introduceVehicleMenu();
-                introduceVehicle(concessionaire);
+                Home.introduceVehicleUi();
+                introduceVehicleMenu(concessionaire);
                 break;
             case 2:
+                concessionaire.showAvailableVehicles(concessionaire);
                 break;
             case 3:
                 break;
             case 0:
                 System.out.println("TORNANT AL MENÚ");
-                Home.runMenu();
+                runMenu(concessionaire);
                 break;
             default:
                 System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");
         }
     }
-    static void introduceVehicleMenu() {
-        System.out.println("=== ESCULL UNA OPCIÓ ===");
-        System.out.println("1. INTRODUIR COTXE");
-        System.out.println("2. INTRODUIR MOTO");
-        System.out.println("3. INTRODUIR CAMIÓ");
-        System.out.println("0. TORNAR AL MENÚ");
-    }
-    static void introduceVehicle(Concessionaire concessionaire) {
+    static void introduceVehicleMenu(Concessionaire concessionaire) {
         int option = DataIntroduction.introduceInteger();
         switch (option) {
             case 1:
-                introduceCar(concessionaire);
+                concessionaire.introduceCar(concessionaire);
                 break;
             case 0:
                 runMenu(concessionaire);
                 break;
-        }
-    }
-    static void introduceCar(Concessionaire concessionaire) {
-        String plate = DataIntroduction.introducePlate();
-        if (plate != null) {
-            char fuel = DataIntroduction.introduceFuelType();
-            if (fuel != '0') {
-                System.out.println("INTRODUEIX LA POTÈNCIA");
-                int horsePower = DataIntroduction.introduceInteger();
-                if (horsePower != -1) {
-                    Car car = new Car(plate, fuel, horsePower);
-                    concessionaire.addNewVehicle(car);
-                } else {
-                    System.out.println("ERROR: NO ÉS UN VALOR VÀLID");
-                    runMenu(concessionaire);
-                }
-            } else {
-                System.out.println("ERROR: NO ÉS UN TIPUS DE COMBUSTIBLE VÀLID");
-                runMenu(concessionaire);
-            }
-        } else {
-            System.out.println("ERROR: NO ÉS UNA MATRÍCULA DISPONIBLE");
-            runMenu(concessionaire);
         }
     }
 }

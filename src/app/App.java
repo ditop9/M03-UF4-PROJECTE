@@ -1,5 +1,6 @@
 package app;
 
+import interfaces.LoadData;
 import location.Concessionaire;
 import location.Workshop;
 import ui.Home;
@@ -13,6 +14,7 @@ public class App {
 
 
     public static void main(String[] args) {
+        LoadData.loadData();
         Home.runMenu();
     }
     public static void showAvailableLocations(List<?> locations) {
@@ -26,5 +28,11 @@ public class App {
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
+    }
+    public static void addConcessionaire(Concessionaire c) {
+        concessionaires.add(c);
+    }
+    public static void addWorkshop(Workshop w) {
+        workshops.add(w);
     }
 }
