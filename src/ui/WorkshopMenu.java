@@ -3,7 +3,7 @@ package ui;
 import interfaces.DataIntroduction;
 import location.Workshop;
 
-public interface WorkshopMenu {
+public interface WorkshopMenu extends Home {
     static void runMenu(Workshop workshop) {
         int option;
         do {
