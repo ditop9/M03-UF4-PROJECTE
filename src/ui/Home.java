@@ -80,7 +80,7 @@ public interface Home {
             System.out.println("INTRODUEIX LA MARCA PRINCIPAL");
             String mainBrand = sc.nextLine();
             System.out.println("VEN VEHICLES DE SEGONA MARCA?");
-            boolean secondHand = sc.nextBoolean();
+            boolean secondHand = DataIntroduction.introduceBoolean();
             Concessionaire concessionaire = new Concessionaire();
         } else {
             System.out.println("ERROR: NO ÉS UN CARÀCTER VÀLID");

@@ -1,6 +1,6 @@
 package app;
 
-import interfaces.LoadData;
+import interfaces.DataIntroduction;
 import location.Concessionaire;
 import location.Workshop;
 import ui.Home;
@@ -14,7 +14,7 @@ public class App {
 
 
     public static void main(String[] args) {
-        LoadData.loadData();
+        DataIntroduction.loadData();
         Home.runMenu();
     }
     public static void showAvailableLocations(List<?> locations) {
