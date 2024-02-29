@@ -3,7 +3,6 @@ package ui;
 import interfaces.DataIntroduction;
 import location.Concessionaire;
 import app.App;
-import location.Location;
 import location.Workshop;
 
 import java.util.List;
@@ -66,7 +65,7 @@ public interface Home {
             System.out.println("0. EXIT");
             int locationIndex = DataIntroduction.introduceInteger();
             if (locationIndex != 0 && locationIndex != -1 && verifyDeletion()) {
-                locations.remove(locationIndex);
+                locations.remove(locationIndex - 1);
             } else runMenu();
         } else {
             System.out.println("ERROR: NO ES TROBEN LOCALS DISPONIBLES");
@@ -79,7 +78,7 @@ public interface Home {
         String city = sc.nextLine();
         System.out.println("INTRODUEIX EL PAÍS");
         String country = sc.nextLine();
-        System.out.println("INTRODUEIX LA QUANTITAT DE TRBALLADORS");
+        System.out.println("INTRODUEIX LA QUANTITAT DE TREBALLADORS");
         int workers = DataIntroduction.introduceInteger();
         if (workers != -1) {
             System.out.println("INTRODUEIX LA MARCA PRINCIPAL");
@@ -99,7 +98,7 @@ public interface Home {
         String city = sc.nextLine();
         System.out.println("INTRODUEIX EL PAÍS");
         String country = sc.nextLine();
-        System.out.println("INTRODUEIX LA QUANTITAT DE TRBALLADORS");
+        System.out.println("INTRODUEIX LA QUANTITAT DE TREBALLADORS");
         int workers = DataIntroduction.introduceInteger();
         if (workers != -1) {
             System.out.println("INTRODUEIX EL NOM DEL TALLER");
@@ -121,6 +120,7 @@ public interface Home {
     static void runConcessionaireMenu() {
         if (!App.concessionaires.isEmpty()) {
             App.showAvailableLocations(App.concessionaires);
+            System.out.println("ESCULL UN CONCESSIONARI");
             System.out.println("0. EXIT");
             int concessionaireIndex = DataIntroduction.introduceInteger();
             if (concessionaireIndex != 0) {
@@ -136,6 +136,7 @@ public interface Home {
     static void runWorkshopMenu() {
         if (!App.workshops.isEmpty()) {
             App.showAvailableLocations(App.workshops);
+            System.out.println("ESCULL UN TALLER");
             System.out.println("0. EXIT");
             int workshopIndex = DataIntroduction.introduceInteger();
             if (workshopIndex != 0) {
@@ -152,7 +153,7 @@ public interface Home {
         System.out.println("""
                 ATENCIÓ ESTÀS A PUNT D'ELIMINAR EL LOCAL
                 AQUESTA ACCIÓ ÉS DEFINITIVA I IRREVERSIBLE
-                ESTÀS SEGUR?/A
+                ESTÀS SEGUR/A?
                 1. ELIMINAR
                 2. NO ELIMINAR""");
         int deleteOption = DataIntroduction.introduceInteger();

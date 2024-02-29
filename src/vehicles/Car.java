@@ -12,6 +12,8 @@ public class Car extends Vehicle {
     @Override
     public String toString() {
         return "Cotxe: " + "\n" +
+                "Número de portes: " + doorNumber + "\n" +
+                "Capacitat maleter: " + trunkCapacity + "\n" +
                 super.toString();
     }
 }

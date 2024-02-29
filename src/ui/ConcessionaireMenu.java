@@ -86,6 +86,9 @@ public interface ConcessionaireMenu extends Home {
             case 1:
                 c.addCar(c);
                 break;
+            case 2:
+                c.addMotorcycle(c);
+                break;
             case 0:
                 runMenu(c);
                 break;

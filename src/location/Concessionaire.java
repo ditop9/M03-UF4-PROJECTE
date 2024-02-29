@@ -5,6 +5,7 @@ import interfaces.DataIntroduction;
 import ui.ConcessionaireMenu;
 import ui.Home;
 import vehicles.Car;
+import vehicles.Motorcycle;
 import vehicles.Vehicle;
 
 import java.util.*;
@@ -78,18 +79,56 @@ public class Concessionaire extends Location implements ConcessionaireMenu {
             ConcessionaireMenu.runMenu(c);
         }
     }
+    public void addMotorcycle(Concessionaire c) {
+        Scanner sc = new Scanner(System.in);
+        String plate = DataIntroduction.introducePlate();
+        if (plate != null) {
+            char fuel = DataIntroduction.introduceFuelType();
+            if (fuel != '0') {
+                System.out.println("INTRODUEIX LA POTÈNCIA");
+                int horsePower = DataIntroduction.introduceInteger();
+                if (horsePower != -1) {
+                    System.out.println("INTRODUEIX EL TIPUS DE MOTO \n" +
+                            "EXEMPLE: ESPORTIVA, MOTOCROSS...");
+                    String type = sc.nextLine();
+                    System.out.println("INTRODUEIX LA CAPACITAT DEL DIPÒSIT");
+                    int fuelQuantity = DataIntroduction.introduceInteger();
+                    if (fuelQuantity != -1) {
+                        System.out.println("INTRODUEIX LA CILINDRADA");
+                        int cylinder = DataIntroduction.introduceInteger();
+                        if (cylinder != -1) {
+                            Motorcycle motorcycle = new Motorcycle(plate, fuel, horsePower, type, fuelQuantity, cylinder);
+                            addNewVehicle(motorcycle);
+                        }
+                    } else {
+                        System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");
+                        ConcessionaireMenu.runMenu(c);
+                    }
+                } else {
+                    System.out.println("ERROR: NO ÉS UN VALOR VÀLID");
+                    ConcessionaireMenu.runMenu(c);
+                }
+            } else {
+                System.out.println("ERROR: NO ÉS UN TIPUS DE COMBUSTIBLE VÀLID");
+                ConcessionaireMenu.runMenu(c);
+            }
+        } else {
+            System.out.println("ERROR: NO ÉS UNA MATRÍCULA DISPONIBLE");
+            ConcessionaireMenu.runMenu(c);
+        }
+    }
     public void showAvailableVehicles() {
         for (int i = 0; i < availableVehiclesConcessionaire.size(); i++) {
             System.out.println((i + 1) + ". " + availableVehiclesConcessionaire.get(i));
         }
     }
     public void sellVehicle(Concessionaire concessionaire) {
-        if (availableVehiclesConcessionaire.isEmpty()) {
+        if (!availableVehiclesConcessionaire.isEmpty()) {
             showAvailableVehicles();
             System.out.println("QUIN VEHICLE VOLS VENDRE?");
             int index = DataIntroduction.introduceInteger();
             try {
-                availableVehiclesConcessionaire.remove(index);
+                availableVehiclesConcessionaire.remove(index - 1);
             } catch (IndexOutOfBoundsException e) {
                 System.out.println("ERROR: NO ES TROBA AQUEST COTXE");
                 ConcessionaireMenu.runMenu(concessionaire);

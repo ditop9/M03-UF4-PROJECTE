@@ -24,7 +24,7 @@ public class Workshop extends Location {
     }
 
     public void setName(String name) {
-
+        this.name = name;
     }
 
     public Workshop(String cityLocation, String countryLocation, int workersAmount, String name) {
