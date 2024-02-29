@@ -32,40 +32,20 @@ public interface Home {
     static void handleOption(int option) {
         switch (option) {
             case 1:
-                if (!App.concessionaires.isEmpty()) {
-                    App.showAvailableLocations(App.concessionaires);
-                    int concessionaireIndex = DataIntroduction.introduceInteger();
-                    Concessionaire concessionaire = (Concessionaire) App.chooseLocation(App.concessionaires ,concessionaireIndex - 1);
-                    if (concessionaire != null) {
-                        ConcessionaireMenu.runMenu(concessionaire);
-                    } else {
-                        System.out.println("ERROR: NO ES TROBA EL CONCESSIONARI");
-                        break;
-                    }
-                } else System.out.println("ERROR: NO ES TROBEN CONCESSIONARIS DISPONIBLES");
+                runConcessionaireMenu();
                 break;
             case 2:
-                if (!App.workshops.isEmpty()) {
-                    App.showAvailableLocations(App.workshops);
-                    int workshopIndex = DataIntroduction.introduceInteger();
-                    Workshop workshop = (Workshop) App.chooseLocation(App.workshops ,workshopIndex - 1);
-                    if (workshop != null) {
-                        WorkshopMenu.runMenu(workshop);
-                    } else {
-                        System.out.println("ERROR: NO ES TROBA EL TALLER");
-                        break;
-                    }
-                } else System.out.println("ERROR: NO ES TROBEN TALLERS DISPONIBLES");
+                runWorkshopMenu();
                 break;
             case 3:
-
+                addNewConcessionaire();
                 break;
             case 0:
                 System.out.println("EL PPROGRAMA ES TANCA...");
                 System.exit(0);
                 break;
             default:
-                System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");;
+                System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");
         }
     }
     static void addNewConcessionaire() {
@@ -81,7 +61,8 @@ public interface Home {
             String mainBrand = sc.nextLine();
             System.out.println("VEN VEHICLES DE SEGONA MARCA?");
             boolean secondHand = DataIntroduction.introduceBoolean();
-            Concessionaire concessionaire = new Concessionaire();
+            Concessionaire concessionaire = new Concessionaire(city, country, workers, mainBrand, secondHand);
+            App.concessionaires.add(concessionaire);
         } else {
             System.out.println("ERROR: NO ÉS UN CARÀCTER VÀLID");
             runMenu();
@@ -94,5 +75,28 @@ public interface Home {
         System.out.println("3. INTRODUIR CAMIÓ");
         System.out.println("0. TORNAR AL MENÚ");
     }
-
+    static void runConcessionaireMenu() {
+        if (!App.concessionaires.isEmpty()) {
+            App.showAvailableLocations(App.concessionaires);
+            int concessionaireIndex = DataIntroduction.introduceInteger();
+            Concessionaire concessionaire = (Concessionaire) App.chooseLocation(App.concessionaires ,concessionaireIndex - 1);
+            if (concessionaire != null) {
+                ConcessionaireMenu.runMenu(concessionaire);
+            } else {
+                System.out.println("ERROR: NO ES TROBA EL CONCESSIONARI");
+            }
+        } else System.out.println("ERROR: NO ES TROBEN CONCESSIONARIS DISPONIBLES");
+    }
+    static void runWorkshopMenu() {
+        if (!App.workshops.isEmpty()) {
+            App.showAvailableLocations(App.workshops);
+            int workshopIndex = DataIntroduction.introduceInteger();
+            Workshop workshop = (Workshop) App.chooseLocation(App.workshops ,workshopIndex - 1);
+            if (workshop != null) {
+                WorkshopMenu.runMenu(workshop);
+            } else {
+                System.out.println("ERROR: NO ES TROBA EL TALLER");
+            }
+        } else System.out.println("ERROR: NO ES TROBEN TALLERS DISPONIBLES");
+    }
 }

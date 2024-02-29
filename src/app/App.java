@@ -2,6 +2,7 @@ package app;
 
 import interfaces.DataIntroduction;
 import location.Concessionaire;
+import location.Location;
 import location.Workshop;
 import ui.Home;
 
@@ -35,4 +36,5 @@ public class App {
     public static void addWorkshop(Workshop w) {
         workshops.add(w);
     }
+
 }
