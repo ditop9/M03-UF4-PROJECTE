@@ -2,7 +2,6 @@ package app;
 
 import interfaces.DataIntroduction;
 import location.Concessionaire;
-import location.Location;
 import location.Workshop;
 import ui.Home;
 

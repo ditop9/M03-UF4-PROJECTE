@@ -6,6 +6,7 @@ public abstract class Vehicle {
     private final int tireQuantity;
     private char fuel;
     private int horsePower;
+    private String type;
 
     public char getFuel() {
         return fuel;
@@ -15,11 +16,12 @@ public abstract class Vehicle {
         return plate;
     }
 
-    public Vehicle(String plate, char fuel, int tireQuantity, int horsePower) {
+    public Vehicle(String plate, char fuel, int tireQuantity, int horsePower, String type) {
         this.plate = plate;
         this.fuel = fuel;
         this.tireQuantity = tireQuantity;
         this.horsePower = horsePower;
+        this.type = type;
     }
 
     @Override
@@ -28,6 +30,7 @@ public abstract class Vehicle {
                 "Quantitat de rodes: " + tireQuantity + "\n" +
                 "Tipus de combustible: " + fuel + "\n" +
                 "Potència: " + horsePower + "\n" +
+                "Tipus: " + type + "\n" +
                 "_____________________________";
     }
 }

@@ -1,10 +1,11 @@
 package vehicles;
 
-import vehicles.Vehicle;
-
 public class Motorcycle extends Vehicle {
-    private String type;
-    public Motorcycle(String plate, char fuel, int tireQuantity, int horsePower) {
-        super(plate, fuel, 2, horsePower);
+    private int fuelQuantity;
+    private int cylinder;
+    public Motorcycle(String plate, char fuel, int tireQuantity, int horsePower, String type, int fuelQuantity, int cylinder) {
+        super(plate, fuel, 2, horsePower, type);
+        this.fuelQuantity = fuelQuantity;
+        this.cylinder = cylinder;
     }
 }

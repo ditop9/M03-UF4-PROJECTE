@@ -1,13 +1,9 @@
 package location;
 
 import vehicles.Vehicle;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public abstract class Location {
-    private final List<Vehicle> vehicleList = new ArrayList<>();
     private final int id;
     private String cityLocation;
     private String countryLocation;

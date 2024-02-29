@@ -7,10 +7,7 @@ import ui.Home;
 import vehicles.Car;
 import vehicles.Vehicle;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Concessionaire extends Location implements ConcessionaireMenu {
     private final List<Vehicle> availableVehiclesConcessionaire = new ArrayList<>();
@@ -52,8 +49,22 @@ public class Concessionaire extends Location implements ConcessionaireMenu {
                     System.out.println("INTRODUEIX EL TIPUS DE COTXE \n" +
                             "EXEMPLE: SEDAN, ESPORTIU...");
                     String type = sc.nextLine();
-                    Car car = new Car(plate, fuel, horsePower, type);
-                    addNewVehicle(car);
+                    System.out.println("INTRODUEIX EL NÚMERO DE PORTES");
+                    int doorQuantity = DataIntroduction.introduceInteger();
+                    if (doorQuantity > 0 && doorQuantity < 6) {
+                        System.out.println("INTRODUIEX LA CAPACITAT DEL MALETER EN LITRES");
+                        int trunkCapacity = DataIntroduction.introduceInteger();
+                        if (trunkCapacity != -1) {
+                            Car car = new Car(plate, fuel, horsePower, type, doorQuantity, trunkCapacity);
+                            addNewVehicle(car);
+                        } else {
+                            System.out.println("ERROR: NO ÉS UNA CAPACITAT VÀLIDA");
+                            ConcessionaireMenu.runMenu(c);
+                        }
+                    } else {
+                        System.out.println("ERROR: NO ÉS UN NÚMERO DE PORTES VÀLID");
+                        ConcessionaireMenu.runMenu(c);
+                    }
                 } else {
                     System.out.println("ERROR: NO ÉS UN VALOR VÀLID");
                     ConcessionaireMenu.runMenu(c);
@@ -87,25 +98,10 @@ public class Concessionaire extends Location implements ConcessionaireMenu {
         }
     }
     public void deleteSelfConcessionaire(Concessionaire c) {
-        System.out.println("ATENCIÓ ESTÀS A PUNT D'ELIMINAR EL CONCESSIONARI\n" +
-                "AQUESTA ACCIÓ ÉS DEFINITIVA I IRREVERSIBLE\n" +
-                "ESTÀS SEGUR?/A\n" +
-                "1. ELIMINAR\n" +
-                "2. NO ELIMINAR");
-        int deleteOption = DataIntroduction.introduceInteger();
-        if (deleteOption == 1) {
-            System.out.println("ESTÀS SEGUR?");
-            Random random = new Random();
-            int password = random.nextInt();
-            System.out.println("INTRODUEIX EL NÚMERO: " + password + " PER CONTINUAR");
-            int confirmation = DataIntroduction.introduceInteger();
-            if (password == confirmation) {
-                int concessionaireIndex = searchConcessionaireById(getId());
-                App.concessionaires.remove(concessionaireIndex);
-                Home.runMenu();
-            } else {
-                System.out.println("ERROR: ELS VALORS NO EREN IGUALS");
-            }
+        if (Home.verifyDeletion()) {
+            int concessionaireIndex = searchConcessionaireById(getId());
+            App.concessionaires.remove(concessionaireIndex);
+            Home.runMenu();
         } else ConcessionaireMenu.runMenu(c);
     }
     public static int searchConcessionaireById(int id) {

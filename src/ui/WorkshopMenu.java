@@ -2,7 +2,8 @@ package ui;
 
 import interfaces.DataIntroduction;
 import location.Workshop;
-import vehicles.Vehicle;
+
+import java.util.Scanner;
 
 public interface WorkshopMenu extends Home {
     static void runMenu(Workshop w) {
@@ -22,7 +23,7 @@ public interface WorkshopMenu extends Home {
         System.out.println("2. MOSTRAR ELS VEHICLES");
         System.out.println("3. REPARAR UN VEHICLE");
         System.out.println("4. EDITAR INFORMACIÓ TALLER");
-        System.out.println("5.ELIMINAR EL TALLER");
+        System.out.println("5. ELIMINAR EL TALLER");
         System.out.println("0. EXIT");
     }
     static void handleOption(int option, Workshop w) {
@@ -60,6 +61,14 @@ public interface WorkshopMenu extends Home {
                     break;
                 }
                 break;
+            case 4:
+                changeInformationMenu();
+                int changeInformationOption = DataIntroduction.introduceInteger();
+                changeInformation(changeInformationOption, w);
+                break;
+            case 5:
+                w.deleteSelfWorkshop(w);
+                break;
             case 0:
                 System.out.println("TORNANT AL MENÚ");
                 Home.runMenu();
@@ -80,6 +89,43 @@ public interface WorkshopMenu extends Home {
             default:
                 System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");
                 break;
+        }
+    }
+    static void changeInformationMenu() {
+        System.out.println("ESCULL LA INFORMACIÓ QUE VOLS CANVIAR");
+        System.out.println("1. CIUTAT");
+        System.out.println("2. PAÍS");
+        System.out.println("3. TREBALLADORS");
+        System.out.println("4. NOM TALLER");
+        System.out.println("0. EXIT");
+    }
+    static void changeInformation(int option, Workshop w) {
+        Scanner sc = new Scanner(System.in);
+        switch (option) {
+            case 1:
+                System.out.println("INTRODUIEX LA NOVA CIUTAT");
+                w.setCityLocation(sc.nextLine());
+                break;
+            case 2:
+                System.out.println("INTRODUEIX EL NOU PAÍS");
+                w.setCountryLocation(sc.nextLine());
+                break;
+            case 3:
+                System.out.println("INTRODUEIX LA QUANTITAT DE TREBALLADORS");
+                int newWorkers = DataIntroduction.introduceInteger();
+                if (newWorkers != -1) {
+                    w.setWorkersAmount(newWorkers);
+                } else System.out.println("ERROR: NO ÉS UN CARÀCTER VÀLID");
+                break;
+            case 4:
+                System.out.println("INTRODUEIX EL NOM DEL TALLER");
+                w.setName(sc.nextLine());
+                break;
+            case 0:
+                WorkshopMenu.runMenu(w);
+            default:
+                System.out.println("ERROR: NO ÉS UNA OPCIÓ VÀLIDA");
+                WorkshopMenu.runMenu(w);
         }
     }
 }
